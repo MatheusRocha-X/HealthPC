@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HealthPC</title>
+  <link rel="icon" type="image/png" href="icon.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="window-controls">
+    <button id="minimizeWindow" title="Minimizar">-</button>
+    <button id="maximizeWindow" title="Maximizar">&#9633;</button>
+    <button id="closeWindow" class="close" title="Fechar">x</button>
+  </div>
+
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="icon.png" class="logo-img" alt="Logo" />
+        <div>
+          <h1>Health<span>PC</span></h1>
+          <p>Seu PC mais leve e saudável</p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-btn active" data-page="home"><span class="ico">&#8962;</span><span>Início</span></button>
+        <button class="nav-btn" data-page="schedule"><span class="ico">&#9716;</span><span>Agendamentos</span></button>
+      </nav>
+
+      <div class="creator">Criado por Matheus do Nascimento Rocha</div>
+
+      <div class="side-footer">
+        <div>Versão 1.0.0</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section id="home" class="page active">
+        <div class="top">
+          <div class="welcome">
+            <h2>Bem-vindo ao <span>HealthPC</span></h2>
+            <p>Faça uma limpeza completa e mantenha seu PC rápido e seguro.</p>
+          </div>
+        </div>
+
+        <section class="scan-card">
+          <div class="scan-main">
+            <div class="meter">
+              <div id="progressRing" class="ring">
+                <div class="ring-inner">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#248cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    <polyline points="9 12 11 14 15 10"></polyline>
+                  </svg>
+                </div>
+              </div>
+              <div class="metric">
+                <div id="foundSize" class="size">0 B</div>
+                <div class="label">de arquivos encontrados</div>
+                <div id="mainStatus" class="status">Pronto para verificar</div>
+              </div>
+            </div>
+
+            <div id="breakdown" class="breakdown"></div>
+          </div>
+
+          <div class="actions">
+            <button id="scanTop" class="primary-btn">Verificar agora</button>
+            <button id="cleanTop" class="green-btn" disabled>Limpar agora</button>
+            <button id="historyTop" class="ghost-btn">Histórico</button>
+          </div>
+        </section>
+
+        <section class="cards compact-cards">
+          <article id="locationsCard" class="mini-card clickable">
+            <h3>Locais ativos</h3>
+            <p id="activeLocations">0 locais selecionados para análise.</p>
+            <button>Ajustar locais</button>
+          </article>
+          <article id="historyCard" class="mini-card clickable">
+            <h3>Histórico de limpeza</h3>
+            <p id="historyPreview">Consulte as limpezas realizadas.</p>
+            <button>Ver histórico</button>
+          </article>
+        </section>
+
+        <section class="lower">
+          <div class="panel">
+            <h3>Resumo da limpeza</h3>
+            <div class="summary-row"><span>Arquivos removidos</span><strong id="summaryFiles">0</strong></div>
+            <div class="summary-row"><span>Espaço liberado</span><strong id="summarySize" class="accent">0 B</strong></div>
+            <div class="summary-row"><span>Avisos na última limpeza</span><strong id="summaryWarnings">0</strong></div>
+            <div class="summary-row"><span>Última limpeza realizada</span><strong id="summaryLast">Ainda não realizada</strong></div>
+          </div>
+          <div class="panel system-panel">
+            <h3>Visão do sistema</h3>
+            <div class="system-grid">
+              <div class="system-stat compact-stat">
+                <div id="memoryGaugeCard" class="mini-gauge" style="--gauge: 0%; --color: #3da0ff">
+                  <span id="memoryValueCardPanel">0%</span>
+                </div>
+                <div class="system-copy">
+                  <span>Memória em uso</span>
+                  <small id="memoryTextCardPanel">Carregando uso de memória.</small>
+                </div>
+              </div>
+              <div class="system-stat compact-stat">
+                <div id="diskGaugeCard" class="mini-gauge" style="--gauge: 0%; --color: #24c777">
+                  <span id="diskValueCard">0%</span>
+                </div>
+                <div class="system-copy">
+                  <span>Espaço em disco</span>
+                  <small id="diskTextCard">Carregando uso do disco.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="tip">
+          <div class="logo mini-logo">i</div>
+          <div><strong>Dica HealthPC</strong> Limpezas seguras ajudam a manter seu PC rápido. Recomendamos executar uma verificação semanal.</div>
+        </div>
+      </section>
+
+      <section id="schedule" class="page">
+        <div class="toolbar">
+          <div>
+            <h2>Agendamentos</h2>
+            <p>Configure limpezas automáticas diárias, semanais ou mensais.</p>
+          </div>
+        </div>
+
+        <section class="schedule-grid">
+          <article class="panel">
+            <h3>Configurar rotina</h3>
+            <label class="field checkbox-field">
+              <input type="checkbox" id="scheduleEnabled" />
+              <span>Ativar limpeza automática</span>
+            </label>
+            <label class="field">
+              <span>Frequência</span>
+              <select id="scheduleFrequency">
+                <option value="daily">Diária</option>
+                <option value="weekly">Semanal</option>
+                <option value="monthly">Mensal</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Horário</span>
+              <input type="time" id="scheduleTime" value="09:00" />
+            </label>
+            <label class="field" id="weekdayField">
+              <span>Dia da semana</span>
+              <select id="scheduleWeekday">
+                <option value="MON">Segunda</option>
+                <option value="TUE">Terça</option>
+                <option value="WED">Quarta</option>
+                <option value="THU">Quinta</option>
+                <option value="FRI">Sexta</option>
+                <option value="SAT">Sábado</option>
+                <option value="SUN">Domingo</option>
+              </select>
+            </label>
+            <label class="field hidden" id="monthdayField">
+              <span>Dia do mês</span>
+              <select id="scheduleMonthday"></select>
+            </label>
+            <div class="form-actions">
+              <button id="saveSchedule" class="green-btn">Salvar agendamento</button>
+            </div>
+          </article>
+
+          <article class="panel">
+            <h3>Status do agendamento</h3>
+            <div class="summary-row"><span>Situação</span><strong id="scheduleStatus">Desativado</strong></div>
+            <div class="summary-row"><span>Frequência atual</span><strong id="scheduleSummaryFrequency">Semanal</strong></div>
+            <div class="summary-row"><span>Horário</span><strong id="scheduleSummaryTime">09:00</strong></div>
+            <div class="summary-row"><span>Observação</span><strong id="scheduleSummaryNote">Sem tarefa registrada.</strong></div>
+            <div class="form-actions">
+              <button id="openTaskScheduler" class="ghost-btn">&#128197; Abrir Agendador do Windows</button>
+            </div>
+          </article>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div id="confirmModal" class="modal">
+    <div class="dialog">
+      <h3>Confirmar limpeza</h3>
+      <p id="confirmText">Os arquivos encontrados serão excluídos permanentemente.</p>
+      <div class="dialog-actions">
+        <button id="cancelClean" class="ghost-btn">Cancelar</button>
+        <button id="confirmClean" class="green-btn">Limpar agora</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="targetsModal" class="modal">
+    <div class="dialog large-dialog">
+      <h3>Locais ativos</h3>
+      <p>Escolha exatamente quais locais farão parte da próxima análise.</p>
+      <div class="modal-toolbar">
+        <button id="modalSelectAll" class="ghost-btn">Selecionar tudo</button>
+        <button id="modalClearAll" class="ghost-btn">Limpar seleção</button>
+      </div>
+      <div id="modalTargetList" class="modal-list"></div>
+      <div class="dialog-actions">
+        <button id="cancelTargets" class="ghost-btn">Cancelar</button>
+        <button id="saveTargets" class="green-btn">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="historyModal" class="modal">
+    <div class="dialog large-dialog">
+      <h3>Histórico de limpeza</h3>
+      <p>Veja as limpezas realizadas e quanto espaço foi liberado.</p>
+      <div id="historyList" class="modal-list history-list"></div>
+      <div class="dialog-actions">
+        <button id="closeHistory" class="green-btn">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
